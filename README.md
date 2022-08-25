@@ -2,7 +2,6 @@
 
 #Import the packages
 
-import pandas as pd
 import seaborn as sns
 
 #Uploading the dataset
