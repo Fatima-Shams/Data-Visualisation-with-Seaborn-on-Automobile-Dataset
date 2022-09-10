@@ -1,0 +1,53 @@
+#Import the packages
+import pandas as pd
+import seaborn as sns
+
+#Uploading the dataset
+auto = pd.read_csv('Automobile.csv')
+
+#Looking at the head of the dataset
+auto.head()
+
+#Histogram for Univariate Distribution Analysis, i.e, for continous variable
+sns.distplot(auto['city_mpg'])
+
+#Rug plot shows the frequency of values and each line indicates a single observation
+sns.distplot(auto['city_mpg'], kde=False, rug=True);
+
+#Plot for Bivariate distribution analysis, i.e, pattern or structure for two continous variables
+sns.jointplot(auto['engine_size'], auto['horsepower'])
+
+#Hexagon plot where it can also be kind:{scatter,reg,resid,kde,hex}
+sns.jointplot(auto['engine_size'], auto['horsepower'],kind='hex')
+
+#Plot for Multivariate distribution Analysis
+sns.pairplot(auto[['normalized_losses','engine_size','horsepower']])
+
+#Plot with 2 variables-one continous and one categorical
+sns.stripplot(auto['fuel_type'], auto['horsepower'], jitter=True)
+
+#Swarmplot is where the points dont overlap with each other
+sns.swarmplot(auto['fuel_type'], auto['horsepower'])
+
+#Boxplots
+sns.boxplot(auto['fuel_type'], auto['horsepower'])
+
+#Barplots
+sns.barplot(auto['body_style'], auto['horsepower'])
+
+#Countplots indicate the frequency of observations
+sns.countplot(auto['body_style'])
+
+#Pointplots show the highest point as single dot as well as confidence intervals
+sns.pointplot(auto['fuel_system'], auto['horsepower'])
+
+#Factorplot is a multipanel categorical plot where it can be kind:{point,bar,count,box,violin,strip}
+sns.factorplot(x="fuel_type",
+              y="horsepower",
+              hue="number_of_doors",
+              col="engine_location",
+              data=auto,
+              kind="swarm")
+
+#Linear Regression Plot(lmplot) which also shows best fit
+sns.lmplot(x="horsepower", y="peak_rpm", data=auto)
